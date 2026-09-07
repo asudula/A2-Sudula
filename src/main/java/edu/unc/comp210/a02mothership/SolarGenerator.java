@@ -2,8 +2,8 @@ package edu.unc.comp210.a02mothership;
 
 public class SolarGenerator extends APowerGenerator{
 
-    public SolarGenerator(String name){
-        super(name);
+    public SolarGenerator(){
+        super("SolarGenerator");
     }
 
     @Override
@@ -11,7 +11,7 @@ public class SolarGenerator extends APowerGenerator{
         System.out.println("Solar Generators will never die");
         super.statusReport(moduleStatus, isSuccessful);
     }
-    
+
     @Override
     public int generatePower() {
         return 10;

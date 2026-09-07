@@ -5,8 +5,8 @@ public class ThrusterModule extends AModule {
     private boolean lastFired;
     //private String name;
 
-    public ThrusterModule(String name){
-        super(name);
+    public ThrusterModule(){
+        super("ThrusterModule");
         fuel = 100;
         lastFired = false;
     }
@@ -34,4 +34,5 @@ public class ThrusterModule extends AModule {
 
 
 
+}
 }

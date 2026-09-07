@@ -35,4 +35,3 @@ public class FoodModule extends AModule{
 
 
 }
-}

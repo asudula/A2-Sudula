@@ -1,7 +1,7 @@
 # A2 Worksheet: Designing the Mothership
 
-**Name:**
-**Onyen:**
+**Name: Abhikruthi Sudula**
+**Onyen: Sudula**
 
 Three questions, 15 points, about fifteen minutes. Do this before you write any
 code; everything you need is in `README.md` and restated below. You should not
@@ -16,12 +16,12 @@ under each prompt.
 how you know. (Remember: IS-A means one class extends the other; HAS-A means one
 class stores the other in a field.)
 
-| Pair | IS-A or HAS-A? | How you know |
-|---|---|---|
-| `FuelGenerator` → `APowerGenerator` |  |  |
-| `Mothership` → `ThrusterModule` |  |  |
-| `SolarGenerator` → `AModule` |  |  |
-| `ExperimentModule` → `double[] parameters` |  |  |
+| Pair | IS-A or HAS-A? | How you know                                                            |
+|---|----------------|-------------------------------------------------------------------------|
+| `FuelGenerator` → `APowerGenerator` | IS-A           | FuelGenerator extends from APowerGenerator                              |
+| `Mothership` → `ThrusterModule` | HAS-A          | Mothership uses ThrusterModule as an argument                           |
+| `SolarGenerator` → `AModule` | IS-A           | SolarGenerator is a APowerGeneratior which is a AModule                  |
+| `ExperimentModule` → `double[] parameters` | HAS-A          | ExperimentModule has double[] parameters as a field for its constructor |
 
 **1b.** Both `AModule` and `APowerGenerator` are declared `abstract`, but only
 `APowerGenerator` declares an **abstract method** (`generatePower()`). These are
@@ -30,13 +30,14 @@ two different design decisions doing two different jobs.
 - Marking the *class* abstract stops a programmer from doing what?
 
 ```
-
+Marking a class abstract stops a programmer from creating an object
+of that class directly.
 ```
 
 - Marking the *method* abstract forces a programmer to do what?
 
 ```
-
+It forces subclasses to implement/override that abstract method.
 ```
 
 **1c.** `ThrusterModule`, `SolarGenerator`, and `ExperimentModule` each override
@@ -46,7 +47,9 @@ own line, and forgets the `super` call. Will the compiler complain? What is
 actually lost, and how would the student find out?
 
 ```
-
+No. The compiler won't complain. The parent class's statusReport 
+behavior is lost, and the student would notice by testing the program 
+and seeing missing output.
 ```
 
 ---
@@ -72,34 +75,38 @@ mothership. The mission then runs four rounds; each round is one
 value that was just returned. Fill in the table.
 
 | Round | Power returned | Generator fuel after | Thruster fuel after | Thrust succeeded? | `lastFired` |
-|---|---|---|---|---|---|
-| start | — | 22 | 100 | — | false |
-| 1 |  |  |  |  |  |
-| 2 |  |  |  |  |  |
-| 3 |  |  |  |  |  |
-| 4 |  |  |  |  |  |
+|---|----------------|----------------------|---------------------|-------------------|-------------|
+| start | —              | 22                   | 100                 | —                 | false       |
+| 1 | 10             | 12                   | 95                  | yes               | true        |
+| 2 | 10             | 2                    | 90                  | yes               | true        |
+| 3 | 2              | 0                    | 90                  | no                | false       |
+| 4 | 0              | 0                    | 90                  | no                | false       |
 
 **2b.** Now change **one line in `Main`** so the ship launches with a
 `SolarGenerator` instead. Nothing inside `Mothership` changes. Redo rounds 3 and
 4 only.
 
 | Round | Power returned | Thruster fuel after | Thrust succeeded? |
-|---|---|---|---|
-| 3 |  |  |  |
-| 4 |  |  |  |
+|---|----------------|---------------------|-------------------|
+| 3 | 10             | 85                  | true              |
+| 4 | 10             | 80                  | true              |
 
 Which line in `Main` changed, and what is it about the **declared type** of the
 mothership's generator field that made that one line enough?
 
 ```
-
+The FuelGenerator now uses SolarGenerator and always generates and returns 10
+regardless of the state. The Mothership can call generatePower() without 
+needing to know which specific type of generator it has.
 ```
 
 **2c.** On the solar ship, the thruster will eventually stop firing anyway.
 Which round is the first failed thrust, and why? Show the arithmetic.
 
 ```
-
+The first failed thrust is Round 21 because the thruster starts with 
+100 fuel and uses 5 fuel per successful thrust. 100/5 = 20 So Rounds
+1–20 succeed, and Round 21 fails because the thruster has 0 fuel.
 ```
 
 ---
@@ -114,7 +121,9 @@ something the ship could do with the `AModule` version that it could not do with
 theirs.
 
 ```
-
+If the constructor used ShieldModule instead of AModule, it would break when we 
+tried to pass another module, like WeaponModule. Using AModule allows any subclass 
+to be passed in and still use the parent class methods.
 ```
 
 **3b.** You ask an AI assistant to help wire up the mothership and it proposes
@@ -132,7 +141,10 @@ third generator (say, `ReactorGenerator`) is added later, and contrast that with
 what the spec's design requires.
 
 ```
-
+When a third generator like ReactorGenerator is added, the team would have to add
+another field, update the usingSolar logic and if statements, and change requestPower(). 
+With the abstract-class design, they only need to create ReactorGenerator as a subclass 
+of AGenerator; Mothership does not need to change.
 ```
 
 ---

@@ -43,12 +43,3 @@ public class ExperimentModule extends AModule {
         super.statusReport(moduleStatus, isSuccessful);
     }
 }
-            System.out.println("ExperimentModule:" + experimentName + "completed.");
-        }
-
-        else {
-            System.out.println("ExperimentModule:" + experimentName + "pending.");
-        }
-        super.statusReport(moduleStatus, isSuccessful);
-    }
-}

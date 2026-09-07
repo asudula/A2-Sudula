@@ -35,4 +35,3 @@ public class ThrusterModule extends AModule {
 
 
 }
-}

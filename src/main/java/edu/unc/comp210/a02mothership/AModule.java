@@ -12,8 +12,6 @@ public abstract class AModule {
     }
 
     public void statusReport(String moduleStatus, boolean isSuccessful) {
-        System.out.println(moduleStatus + " is Initializing " + "…");
-
         System.out.println(this.name + " is " + moduleStatus + "...");
 
         if (isSuccessful) {

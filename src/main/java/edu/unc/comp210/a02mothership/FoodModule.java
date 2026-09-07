@@ -1,8 +1,8 @@
 package edu.unc.comp210.a02mothership;
 
 public class FoodModule extends AModule{
-    int amountOfFood;
-    int daysInFridge;
+    private int amountOfFood;
+    private int daysInFridge;
 
     public FoodModule(String name, int amountOfFood){
         super(name);
@@ -34,4 +34,5 @@ public class FoodModule extends AModule{
     }
 
 
+}
 }
